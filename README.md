@@ -1,6 +1,6 @@
 # LinkStatus
 
-LinkStatus reads a supplied file, finds, and checks links via a GET request. The program returns the status codes of the links and lists them for the user in colour.
+LinkStatus reads a supplied file, finds, and checks links via a GET request. The program returns the status codes of the links and lists them for the user in colour. A few test files are included within the project.
 
 This program was developed using the GO programming language.
 
