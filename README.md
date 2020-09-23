@@ -1,12 +1,13 @@
 # LinkStatus
 
-LinkStatus reads a supplied file, finds, and checks links via a GET request. The program returns the status codes of the links and lists them for the user.
+LinkStatus reads a supplied file, finds, and checks links via a GET request. The program returns the status codes of the links and lists them for the user in colour.
+
 This program was developed using the GO programming language.
 
 # Introduction
-Hello to the person reading this. This is my release 0.1 project for the DPS909 class.
+Hello to the person reading this. This is my release 0.1 project for the DPS909 class. The class is about open source development and this project had us use git and communicate with one another to solve problems we had during development.
 
-I have a blog going alongside the development of this project and future projects for this class which you can find [here](https://matthew-k-stewardson.blogspot.com/)
+I have a blog going alongside the development of this project and future projects for this class which you can find [here](https://matthew-k-stewardson.blogspot.com/).
 
 ## Installation
 Install GO on your machine and reboot. Then:
@@ -31,6 +32,13 @@ To run the program with a file and check the links use:
 ```bash
 go run LinkStatus.go filename
 ```
+## Libraries Used
+- net/http
+- regexp
+- time
+- fatih/color
+- pflag
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
