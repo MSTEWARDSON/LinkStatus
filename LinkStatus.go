@@ -1,9 +1,9 @@
 /*
 Name:    Matthew Stewardson
 Date:    23-09-20
-Version: 1.0.1
-Desc:    Second iteration of my link checker project. I added the ability to read from a given file, and check url's from the file
-Extra:   This is my first time using GO so I'm leaving comments to explain certain aspects of the code for reference.
+Version: 1.0.3
+Desc:    Third iteration of my link checker project. I added colour and optional version commands
+Optional Features: Colour and Timeout
 */
 package main
 
@@ -14,9 +14,10 @@ import (
 	"net/http"
 	"os"
 	"regexp"
+	"time"
 
 	"github.com/fatih/color"
-	flag "github.com/spf13/pflag" //Using pflag here for added functionality compared to flag
+	flag "github.com/spf13/pflag"
 )
 
 /*
@@ -35,13 +36,11 @@ func readFile(file string) {
 	fmt.Println("File output")
 	var temp = "test"
 	for i := range result {
-		//checkStatus(result[i], i)
 		if temp == result[i] {
-			//DO nothing its a dupe
+
 		} else {
 			checkStatus(result[i], i)
 		}
-		//fmt.Println(result[i])
 		temp = result[i]
 	}
 }
@@ -55,35 +54,25 @@ func checkStatus(url string, i int) {
 	g := color.New(color.FgGreen)
 
 	i++
-	response, err := http.Get(url)
+
+	//Timeout
+	h := &http.Client{
+		Timeout: 7 * time.Second,
+	}
+
+	response, err := h.Get(url)
 
 	if err != nil {
-		r.Println(i, "-> [ERROR]   ", "URL: ", url)
+		r.Println(i, " -> [ERROR]   ", "URL: ", url)
 	} else {
 		if response.StatusCode >= 200 && response.StatusCode <= 299 {
-			if i < 10 {
-				g.Println(i, " -> [GOOD]    ", response.StatusCode, "URL: ", url)
-			} else {
-				g.Println(i, "-> [GOOD]    ", response.StatusCode, "URL: ", url)
-			}
+			g.Println(i, " -> [GOOD]    ", response.StatusCode, "URL: ", url)
 		} else if response.StatusCode == 400 {
-			if i < 10 {
-				r.Println(i, " -> [BAD]     ", response.StatusCode, "URL: ", url)
-			} else {
-				r.Println(i, "-> [BAD]     ", response.StatusCode, "URL: ", url)
-			}
+			r.Println(i, " -> [BAD]     ", response.StatusCode, "URL: ", url)
 		} else if response.StatusCode == 404 {
-			if i < 10 {
-				r.Println(i, " -> [BAD]     ", response.StatusCode, "URL: ", url)
-			} else {
-				r.Println(i, "-> [BAD]     ", response.StatusCode, "URL: ", url)
-			}
+			r.Println(i, " -> [BAD]     ", response.StatusCode, "URL: ", url)
 		} else {
-			if i < 10 {
-				c.Println(i, " -> [UNKNOWN]  URL: ", url)
-			} else {
-				c.Println(i, "-> [UNKNOWN]  URL: ", url)
-			}
+			c.Println(i, " -> [UNKNOWN]  URL: ", url)
 		}
 		defer response.Body.Close()
 	}
@@ -105,7 +94,7 @@ func main() {
 Name: LinkStatus
 Usage: go run LinkStatus.go filenames
 Example: go run LinkStatus.go urls.txt
-Version: go run main.go -v or --version to check version.
+Version: go run LinkStatus.go -v or --version to check version.
 				   `)
 		os.Exit(-1)
 	}
