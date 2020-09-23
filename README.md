@@ -4,9 +4,12 @@ LinkStatus reads a supplied file, finds, and checks links via a GET request. The
 This program was developed using the GO programming language.
 
 ## Installation
+Install GO on your machine and reboot. Then:
 
 Use the package mananger to install LinkStatus.go
 ```bash
+git clone https://github.com/MSTEWARDSON/LinkStatus.git
+cd LinkStatus
 go install LinkStatus.go
 ```
 ## Usage
@@ -23,7 +26,6 @@ To run the program with a file and check the links use:
 ```bash
 go run LinkStatus.go filename
 ```
-
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
