@@ -33,11 +33,15 @@ To run the program with a file and check the links use:
 go run LinkStatus.go filename
 ```
 ## Libraries Used
-- net/http
-- regexp
-- time
-- fatih/color
-- pflag
+- [net http](https://golang.org/pkg/net/http/)
+- [regexp](https://golang.org/pkg/regexp/)
+- [time](https://golang.org/pkg/time/)
+- [fatih color](https://github.com/fatih/color)
+- [pflag](https://github.com/spf13/pflag)
+
+## Optional Features
+- Colourized output: Good URLs come out green, bad URLs come out red, and unknown URLs come out in light blue
+- Timeout: If a GET request gets hanged up for too long, the program moves on.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
