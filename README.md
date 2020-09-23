@@ -3,6 +3,11 @@
 LinkStatus reads a supplied file, finds, and checks links via a GET request. The program returns the status codes of the links and lists them for the user.
 This program was developed using the GO programming language.
 
+# Introduction
+Hello to the person reading this. This is my release 0.1 project for the DPS909 class.
+
+I have a blog going alongside the development of this project and future projects for this class which you can find [here](https://matthew-k-stewardson.blogspot.com/)
+
 ## Installation
 Install GO on your machine and reboot. Then:
 
