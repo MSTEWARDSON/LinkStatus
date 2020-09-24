@@ -56,11 +56,11 @@ func checkStatus(url string, i int) {
 	i++
 
 	//Timeout
-	h := &http.Client{
+	client := &http.Client{
 		Timeout: 7 * time.Second,
 	}
 
-	response, err := h.Get(url)
+	response, err := client.Get(url)
 
 	if err != nil {
 		r.Println(i, " -> [ERROR]   ", "URL: ", url)
