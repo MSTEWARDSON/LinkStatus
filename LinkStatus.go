@@ -43,6 +43,9 @@ func readFile(file string) {
 			k++
 		}
 		temp = result[i]
+
+	for i, link := range result {
+		checkStatus(link, i)
 	}
 }
 
