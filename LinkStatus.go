@@ -1,7 +1,7 @@
 /*
 Name:    Matthew Stewardson
 Date:    23-09-20
-Version: 1.0.3
+Version: 1.0.4
 Desc:    Forth iteration of my link checker project. Bug fixes
 Optional Features: Colour and Timeout
 */
@@ -34,11 +34,13 @@ func readFile(file string) {
 	result := re.FindAllString(text, -1)
 	fmt.Println("File output")
 	var temp = "test"
+	var k = 0
 	for i := range result {
 		if temp == result[i] {
 			//This is to ignore dupes
 		} else {
-			checkStatus(result[i], i)
+			checkStatus(result[i], k)
+			k++
 		}
 		temp = result[i]
 	}
