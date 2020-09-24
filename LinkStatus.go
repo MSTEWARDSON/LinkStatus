@@ -2,7 +2,7 @@
 Name:    Matthew Stewardson
 Date:    23-09-20
 Version: 1.0.3
-Desc:    Third iteration of my link checker project. I added colour and optional version commands
+Desc:    Forth iteration of my link checker project. Bug fixes
 Optional Features: Colour and Timeout
 */
 package main
@@ -29,7 +29,6 @@ func readFile(file string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	text := string(f)
 	re := regexp.MustCompile(`https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)`)
 	result := re.FindAllString(text, -1)
@@ -37,7 +36,7 @@ func readFile(file string) {
 	var temp = "test"
 	for i := range result {
 		if temp == result[i] {
-
+			//This is to ignore dupes
 		} else {
 			checkStatus(result[i], i)
 		}
@@ -47,21 +46,16 @@ func readFile(file string) {
 
 //Does a GET request on the given string found within the file
 func checkStatus(url string, i int) {
-
 	//Colours
 	c := color.New(color.FgCyan)
 	r := color.New(color.FgRed)
 	g := color.New(color.FgGreen)
-
 	i++
-
 	//Timeout
 	client := &http.Client{
 		Timeout: 7 * time.Second,
 	}
-
 	response, err := client.Get(url)
-
 	if err != nil {
 		r.Println(i, " -> [ERROR]   ", "URL: ", url)
 	} else {
@@ -83,12 +77,10 @@ var version = flag.BoolP("version", "v", false, "prints out version info")
 
 func main() {
 	flag.Parse()
-
 	if *version == true {
 		fmt.Println("LinkStatus version 0.1.2")
 		return
 	}
-
 	if len(os.Args) == 1 {
 		fmt.Println(`
 Name: LinkStatus
@@ -98,9 +90,7 @@ Version: go run LinkStatus.go -v or --version to check version.
 				   `)
 		os.Exit(-1)
 	}
-
 	fmt.Println("Checking files ", os.Args[1:])
-
 	for _, file := range os.Args[1:] {
 		readFile(file)
 	}
