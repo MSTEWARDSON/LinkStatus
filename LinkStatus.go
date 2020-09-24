@@ -34,14 +34,9 @@ func readFile(file string) {
 	re := regexp.MustCompile(`https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)`)
 	result := re.FindAllString(text, -1)
 	fmt.Println("File output")
-	var temp = "test"
-	for i := range result {
-		if temp == result[i] {
 
-		} else {
-			checkStatus(result[i], i)
-		}
-		temp = result[i]
+	for i, link := range result {
+		checkStatus(link, i)
 	}
 }
 
