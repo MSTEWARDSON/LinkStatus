@@ -48,8 +48,6 @@ func checkStatus(url string, i int) {
 	r := color.New(color.FgRed)
 	g := color.New(color.FgGreen)
 
-	i++
-
 	//Timeout
 	h := &http.Client{
 		Timeout: 7 * time.Second,
