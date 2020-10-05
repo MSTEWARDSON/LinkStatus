@@ -80,7 +80,7 @@ var version = flag.BoolP("version", "v", false, "prints out version info")
 func main() {
 	flag.Parse()
 	if *version == true {
-		fmt.Println("LinkStatus version 0.1.2")
+		fmt.Println("LinkStatus version 0.1.4")
 		return
 	}
 	if len(os.Args) == 1 {
