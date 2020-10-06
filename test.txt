@@ -15,3 +15,8 @@
 <a href="http://zadkielm.blogspot.com/feeds/posts/default/-/open%20source">http://zadkielm.blogspot.com/feeds/posts/default/-/open%20source</a>
 <a href="http://travisrawn.blogspot.com/feeds/posts/default">http://travisrawn.blogspot.com/feeds/posts/default</a>
 <a href="http://dev-blog.zerogin.com/category/opensource/feed/">http://dev-blog.zerogin.com/category/opensource/feed/</a>
+<a href="http://dev-blog.zerogin.com/category/opensource/feed/">http://dev-blog.zerogin.com/category/opensource/feed/</a>
+<a href="http://peter.sykokillers.com/category/open-source/feed/">http://peter.sykokillers.com/category/open-source/feed/</a>
+<a href="http://http://stephenruthland.wordpress.com/feed/">http://http://stephenruthland.wordpress.com/feed/</a>
+<a href="http://main.justinflowers.ca/web/wordpress/?cat=2&amp;feed=rss2">http://main.justinflowers.ca/web/wordpress/?cat=2&amp;feed=rss2</a>
+<a href="http://http://hhashimi3.wordpress.com/feed/">http://http://hhashimi3.wordpress.com/feed/</a>

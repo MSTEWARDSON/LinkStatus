@@ -1,7 +1,7 @@
 /*
 Name:    Matthew Stewardson
-Date:    23-09-20
-Version: 1.0.4
+Date:    06-10-20
+Version: 0.1.4
 Desc:    Forth iteration of my link checker project. Bug fixes
 Optional Features: Colour and Timeout
 */
@@ -19,6 +19,9 @@ import (
 	"github.com/fatih/color"
 	flag "github.com/spf13/pflag"
 )
+
+//Global Var's
+var typeLink int = 1
 
 /*
 Opens and reads the given file into a single string. This string is then
@@ -61,7 +64,7 @@ func checkStatus(url string, i int, choice bool) {
 	i++
 	//Timeout
 	client := &http.Client{
-		Timeout: 7 * time.Second,
+		Timeout: 5 * time.Second,
 	}
 	response, err := client.Get(url)
 
@@ -93,33 +96,67 @@ func checkStatus(url string, i int, choice bool) {
 		}
 		fmt.Print("' },")
 	} else {
-		if err != nil {
-			r.Println(i, " -> [ERROR]   ", "URL: ", url)
-		} else {
-			if response.StatusCode >= 200 && response.StatusCode <= 299 {
-				g.Println(i, " -> [GOOD]    ", response.StatusCode, "URL: ", url)
-			} else if response.StatusCode == 400 {
-				r.Println(i, " -> [BAD]     ", response.StatusCode, "URL: ", url)
-			} else if response.StatusCode == 404 {
-				r.Println(i, " -> [BAD]     ", response.StatusCode, "URL: ", url)
+		switch typeLink {
+		case 1:
+			if err != nil {
+				r.Println(i, " -> [ERROR]   ", "URL: ", url)
 			} else {
-				c.Println(i, " -> [UNKNOWN]  URL: ", url)
+				if response.StatusCode >= 200 && response.StatusCode <= 299 {
+					g.Println(i, " -> [GOOD]    ", response.StatusCode, "URL: ", url)
+				} else if response.StatusCode == 400 {
+					r.Println(i, " -> [BAD]     ", response.StatusCode, "URL: ", url)
+				} else if response.StatusCode == 404 {
+					r.Println(i, " -> [BAD]     ", response.StatusCode, "URL: ", url)
+				} else {
+					c.Println(i, " -> [UNKNOWN]  URL: ", url)
+				}
+				defer response.Body.Close()
 			}
-			defer response.Body.Close()
+		case 2:
+			if err != nil {
+				//Nothing
+			} else {
+				if response.StatusCode >= 200 && response.StatusCode <= 299 {
+					g.Println(i, " -> [GOOD]    ", response.StatusCode, "URL: ", url)
+				}
+				defer response.Body.Close()
+			}
+		case 3:
+			if err != nil {
+				r.Println(i, " -> [ERROR]   ", "URL: ", url)
+			} else {
+				if response.StatusCode == 400 {
+					r.Println(i, " -> [BAD]     ", response.StatusCode, "URL: ", url)
+				} else if response.StatusCode == 404 {
+					r.Println(i, " -> [BAD]     ", response.StatusCode, "URL: ", url)
+				} else {
+					c.Println(i, " -> [UNKNOWN]  URL: ", url)
+				}
+				defer response.Body.Close()
+			}
 		}
 	}
 }
 
-//Setting up the optional version command
+// JSON flag
+var JSONchoice = false
+
+// Setting up the optional version command
 var version = flag.BoolP("version", "v", false, "prints out version info")
 
-//JSON output command agr
+// JSON output command arg
 var JSONout = flag.BoolP("json", "j", false, "prints link output in JSON format")
 
+// All flag
+var all = flag.BoolP("all", "a", false, "Prints out all types of responses")
+
+// Good flag
+var good = flag.BoolP("good", "g", false, "Prints out only good responses")
+
+// Bad flag
+var bad = flag.BoolP("bad", "b", false, "Prints out only bad responses")
+
 func main() {
-
-	var JSONchoice = false
-
 	flag.Parse()
 	if *version == true {
 		fmt.Println("LinkStatus version 0.1.5")
@@ -129,6 +166,18 @@ func main() {
 		fmt.Println("JSON output selected")
 		JSONchoice = true
 	}
+	if *all == true {
+		fmt.Println("Outputting all types of links")
+		typeLink = 1
+	}
+	if *good == true {
+		fmt.Println("Outputting only good types of links")
+		typeLink = 2
+	}
+	if *bad == true {
+		fmt.Println("Outputting only bad types of links")
+		typeLink = 3
+	}
 	if len(os.Args) == 1 {
 		fmt.Println(`
 Name: LinkStatus
@@ -136,6 +185,9 @@ Usage: go run LinkStatus.go filenames
 Example: go run LinkStatus.go urls.txt
 Version: go run LinkStatus.go -v or --version to check version.
 JSON Format: go run LinkStatus.go -j or --json to output as JSON format
+All:  go run LinkStatus.go -a or --all to output all types of responses
+Good: go run LinkStatus.go -g or --good to output only good types of responses
+Bad:  go run LinkStatus.go -b or --bad to output only bad types of responses
 				   `)
 		os.Exit(0)
 	}
