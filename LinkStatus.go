@@ -49,6 +49,9 @@ func readFile(file string, choice bool) {
 			k++
 		}
 		temp = result[i]
+
+	for i, link := range result {
+		checkStatus(link, i)
 	}
 	if choice == true {
 		fmt.Println(" ]")
