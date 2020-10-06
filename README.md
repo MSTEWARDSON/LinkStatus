@@ -32,6 +32,24 @@ To run the program with a file and check the links use:
 ```bash
 go run LinkStatus.go filename
 ```
+To output the data in JSON format:
+```bash
+go run LinkStatus.go filename -j or --json
+```
+
+To output all url response types:
+```bash
+go run LinkStatus.go filename -a or --all
+```
+To output only good url response types:
+```bash
+go run LinkStatus.go filename -g or --good
+```
+To output only bad url response types:
+```bash
+go run LinkStatus.go filename -b or --bad
+```
+
 ## Libraries Used
 - [net http](https://golang.org/pkg/net/http/): Used to handle the GET requests and Timeout features
 - [regexp](https://golang.org/pkg/regexp/): Used to search for http and https links in a string
@@ -41,6 +59,8 @@ go run LinkStatus.go filename
 ## Optional Features
 - Colourized output: Good URLs come out green, bad URLs come out red, and unknown URLs come out in light blue
 - Timeout: If a GET request gets hanged up for too long, the program moves on.
+- JSON Format: URL list comes out in JSON format when selected
+- -All, -Good, -Bad: URL list can be sorted to certain categorys
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
