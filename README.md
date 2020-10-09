@@ -21,6 +21,9 @@ go install main.go
 ## Usage
 
 To recieve help information run the program with no arguments:
+
+![](images/demo-1.PNG)
+
 ```bash
 go run main.go
 
@@ -34,10 +37,16 @@ To see the current version run:
 go run main.go -v or --version
 ```
 To run the program with a file and check the links use:
+
+![](images/demo-2.PNG)
+
 ```bash
 go run main.go filename
 ```
 To output the data in JSON format:
+
+![](images/demo-3.PNG)
+
 ```bash
 go run main.go filename -j or --json
 ```
@@ -51,6 +60,9 @@ To output only good url response types:
 go run main.go filename -g or --good
 ```
 To output only bad url response types:
+
+![](images/demo-4.PNG)
+
 ```bash
 go run main.go filename -b or --bad
 ```
