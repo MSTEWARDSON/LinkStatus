@@ -8,6 +8,7 @@ Optional Features: Colour and Timeout
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -135,12 +136,40 @@ func readFile(file string, jsonC bool, linkC int) {
 	}
 }
 
+func ignoreURL(fileName string) []string {
+	// urls to ignore
+	var s []string
+	file, err := os.Open(fileName)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+	scanner := bufio.NewScanner(file)
+	re := regexp.MustCompile("^(#|https?://)")
+	for scanner.Scan() {
+		if !re.Match(scanner.Bytes()) {
+			fmt.Println("Ignore file invalid")
+			os.Exit(1)
+		}
+		if line := scanner.Text(); string(line[0]) != "#" {
+			s = append(s, line)
+		}
+	}
+
+	if err := scanner.Err(); err != nil {
+		log.Fatal(err)
+	}
+	return s
+}
+
 func main() {
 	var version = flag.BoolP("version", "v", false, "prints out version info")
 	var JSONout = flag.BoolP("json", "j", false, "prints link output in JSON format")
 	var all = flag.BoolP("all", "a", false, "Prints out all types of responses")
 	var good = flag.BoolP("good", "g", false, "Prints out only good responses")
 	var bad = flag.BoolP("bad", "b", false, "Prints out only bad responses")
+	var ignore = flag.BoolP("ignore", "i", false, "ignore url patterns")
+
 	var JSONchoice = false
 	var typeLink int = 1
 
