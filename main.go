@@ -226,6 +226,8 @@ JSON Format: go run LinkStatus.go -j or --json to output as JSON format
 All:  go run LinkStatus.go -a or --all to output all types of responses
 Good: go run LinkStatus.go -g or --good to output only good types of responses
 Bad:  go run LinkStatus.go -b or --bad to output only bad types of responses
+Ignore: go run test.txt -i or --ignore to ingnore the url patterns in ignore.txt file.
+
 				   `)
 		os.Exit(0)
 	}

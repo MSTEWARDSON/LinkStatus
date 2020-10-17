@@ -65,6 +65,11 @@ To output only bad url response types:
 
 ```bash
 go run main.go filename -b or --bad
+
+```
+To ingnore url patterns in ignore.txt:
+```bash
+go run main.go filename -i or --ignore
 ```
 
 ## Libraries Used
@@ -78,6 +83,7 @@ go run main.go filename -b or --bad
 - Timeout: If a GET request gets hanged up for too long, the program moves on.
 - JSON Format: URL list comes out in JSON format when selected
 - -All, -Good, -Bad: URL list can be sorted to certain categorys
+- -i, --ignore: ignore url patterns in ignore.txt.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
