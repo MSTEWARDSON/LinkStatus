@@ -15,6 +15,7 @@ import (
 	"net/http"
 	"os"
 	"regexp"
+	"strings"
 	"time"
 
 	"github.com/fatih/color"
@@ -108,7 +109,7 @@ func checkStatus(url string, i int, jsonC bool, linkC int) {
 Opens and reads the given file into a single string. This string is then
 checked for url's via a regex pattern.
 */
-func readFile(file string, jsonC bool, linkC int) {
+func readFile(file string, jsonC bool, linkC int, ignore bool) {
 	f, err := ioutil.ReadFile(file)
 	if err != nil {
 		log.Fatal(err)
@@ -122,6 +123,26 @@ func readFile(file string, jsonC bool, linkC int) {
 	if jsonC == true {
 		fmt.Print("[")
 	}
+	// TODO: ignore links here.
+	if ignore {
+		var tp []string
+		s := ignoreURL("ignore.txt")
+		fmt.Println("ignored urls ", s)
+		for _, link := range result {
+			valid := true
+			for _, url := range s {
+				if strings.HasPrefix(link, url) {
+					valid = false
+					break
+				}
+			}
+			if valid {
+				tp = append(tp, link)
+			}
+		}
+		result = tp
+	}
+
 	for i := range result {
 		if temp == result[i] {
 			//This is to ignore dupes
@@ -136,6 +157,7 @@ func readFile(file string, jsonC bool, linkC int) {
 	}
 }
 
+// extract the urls from ignore.txt
 func ignoreURL(fileName string) []string {
 	// urls to ignore
 	var s []string
@@ -211,7 +233,7 @@ Bad:  go run LinkStatus.go -b or --bad to output only bad types of responses
 	fmt.Println("Checking files ", os.Args[1:])
 	for _, file := range os.Args[1:] {
 		if file[0] != '-' {
-			readFile(file, JSONchoice, typeLink)
+			readFile(file, JSONchoice, typeLink, *ignore)
 		}
 	}
 	os.Exit(0)
