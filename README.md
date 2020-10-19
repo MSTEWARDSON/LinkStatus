@@ -16,7 +16,7 @@ Use the package mananger to install LinkStatus.go
 ```bash
 git clone https://github.com/MSTEWARDSON/LinkStatus.git
 cd LinkStatus
-go install main.go
+go build
 ```
 ## Usage
 
@@ -25,51 +25,47 @@ To recieve help information run the program with no arguments:
 ![](images/demo-1.PNG)
 
 ```bash
-go run main.go
-
-OR
-
-./LinkStatus.exe
+./LinkStatus
 ```
 
 To see the current version run:
 ```bash
-go run main.go -v or --version
+./LinkStatus -v or --version
 ```
 To run the program with a file and check the links use:
 
 ![](images/demo-2.PNG)
 
 ```bash
-go run main.go filename
+./LinkStatus filename
 ```
 To output the data in JSON format:
 
 ![](images/demo-3.PNG)
 
 ```bash
-go run main.go filename -j or --json
+./LinkStatus filename -j or --json
 ```
 
 To output all url response types:
 ```bash
-go run main.go filename -a or --all
+./LinkStatus filename -a or --all
 ```
 To output only good url response types:
 ```bash
-go run main.go filename -g or --good
+./LinkStatus filename -g or --good
 ```
 To output only bad url response types:
 
 ![](images/demo-4.PNG)
 
 ```bash
-go run main.go filename -b or --bad
+./LinkStatus filename -b or --bad
 
 ```
 To ingnore url patterns in ignore.txt:
 ```bash
-go run main.go filename -i or --ignore
+./LinkStatus filename -i or --ignore
 ```
 
 ## Libraries Used
