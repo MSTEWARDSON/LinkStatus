@@ -8,7 +8,12 @@ Optional Features: Colour and Timeout
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io"
+	"io/ioutil"
+	"log"
+	"net/http"
 	"os"
 
 	flag "github.com/spf13/pflag"
@@ -21,12 +26,14 @@ func main() {
 	var good = flag.BoolP("good", "g", false, "Prints out only good responses")
 	var bad = flag.BoolP("bad", "b", false, "Prints out only bad responses")
 	var ignore = flag.BoolP("ignore", "i", false, "Ignore certain url patterns")
+	var telescope = flag.BoolP("telescope", "t", false, "Read data from telescope local host")
 	var JSONchoice = false
 	var typeLink int = 1
 	var result []string
 	var temp = "test"
 	var k = 0
 	var total = 0
+	var tele = false
 
 	flag.Parse()
 	if *version == true {
@@ -48,6 +55,10 @@ func main() {
 	if *bad == true {
 		fmt.Println("Outputting only bad types of links")
 		typeLink = 3
+	}
+	if *telescope == true {
+		fmt.Println("Reading telescope post output")
+		tele = true
 	}
 	if len(os.Args) == 1 {
 		fmt.Println(`
@@ -71,7 +82,11 @@ Ignore:  ./LinkStatus test.txt -i or --ignore to ignore certain url patterns
 	fmt.Println("----------------------------------------------------------------------------------")
 	for _, file := range os.Args[1:] {
 		if file[0] != '-' {
-			result = readFile(file, JSONchoice, typeLink, *ignore)
+			if tele == true {
+				telescopeParse(file)
+				file = "tData.txt"
+			}
+			result = readFile(file, JSONchoice, typeLink, *ignore, tele)
 			if JSONchoice == true {
 				fmt.Print("[")
 			}
@@ -93,5 +108,69 @@ Ignore:  ./LinkStatus test.txt -i or --ignore to ignore certain url patterns
 	fmt.Println("----------------------------------------------------------------------------------")
 	fmt.Println("Total URL Count: ", total)
 	fmt.Println("==================================================================================")
+	//Remove the temp files
+	err := os.Remove("telescopeData.json")
+	if err != nil {
+		log.Fatal(err)
+	}
+	e := os.Remove("tData.txt")
+	if e != nil {
+		log.Fatal(e)
+	}
 	os.Exit(0)
+}
+
+//Telescope struct which lays out the json data for easy storage
+type Telescope struct {
+	ID  string `json:"id"`
+	URL string `json:"url"`
+}
+
+func telescopeParse(file string) {
+	fmt.Println("Telescope Parsing")
+	fmt.Println(file)
+	fmt.Println("----------------------------------------------------------------------------------")
+
+	//Get the json data in a file
+	out, _ := os.OpenFile("telescopeData.json", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	defer out.Close()
+	resp, err := http.Get(file)
+	if err != nil {
+		log.Println(err)
+	}
+	defer resp.Body.Close()
+	_, err = io.Copy(out, resp.Body)
+	if err != nil {
+		log.Println(err)
+	}
+
+	jsonFile, err := os.Open("telescopeData.json")
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	byteValue, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	var teleData []Telescope
+
+	err = json.Unmarshal(byteValue, &teleData)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	telescopeFile, err := os.OpenFile("tData.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for i := 0; i < len(teleData); i++ {
+		telescopeFile.Write([]byte("http://localhost:3000" + teleData[i].URL + " "))
+		//fmt.Println("http://localhost:3000" + teleData[i].URL + " \n")
+	}
+
+	telescopeFile.Close()
+	jsonFile.Close()
 }
