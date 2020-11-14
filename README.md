@@ -9,62 +9,53 @@ Hello to the person reading this. This is my release 0.1 project for the DPS909 
 
 I have a blog going alongside the development of this project and future projects for this class which you can find [here](https://matthew-k-stewardson.blogspot.com/).
 
-## Installation
-Install GO on your machine and reboot. Then:
-
-Use the package mananger to install LinkStatus.go
-```bash
-git clone https://github.com/MSTEWARDSON/LinkStatus.git
-cd LinkStatus
-go build
-```
 ## Usage
 
 To recieve help information run the program with no arguments:
 
 ![](images/demo-1.PNG)
 
-```bash
+```go
 ./LinkStatus
 ```
 
 To see the current version run:
-```bash
+```go
 ./LinkStatus -v or --version
 ```
 To run the program with a file and check the links use:
 
 ![](images/demo-2.PNG)
 
-```bash
+```go
 ./LinkStatus filename
 ```
 To output the data in JSON format:
 
 ![](images/demo-3.PNG)
 
-```bash
+```go
 ./LinkStatus filename -j or --json
 ```
 
 To output all url response types:
-```bash
+```go
 ./LinkStatus filename -a or --all
 ```
 To output only good url response types:
-```bash
+```go
 ./LinkStatus filename -g or --good
 ```
 To output only bad url response types:
 
 ![](images/demo-4.PNG)
 
-```bash
+```go
 ./LinkStatus filename -b or --bad
 
 ```
 To ingnore url patterns in ignore.txt:
-```bash
+```go
 ./LinkStatus filename -i or --ignore
 ```
 
@@ -81,9 +72,5 @@ To ingnore url patterns in ignore.txt:
 - -All, -Good, -Bad: URL list can be sorted to certain categorys
 - -i, --ignore: ignore url patterns in ignore.txt.
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
-
