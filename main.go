@@ -168,7 +168,6 @@ func telescopeParse(file string) {
 
 	for i := 0; i < len(teleData); i++ {
 		telescopeFile.Write([]byte("http://localhost:3000" + teleData[i].URL + " "))
-		//fmt.Println("http://localhost:3000" + teleData[i].URL + " \n")
 	}
 
 	telescopeFile.Close()
