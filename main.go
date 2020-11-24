@@ -1,9 +1,8 @@
 /*
 Name:    Matthew Stewardson
-Date:    09-10-20
-Version: 0.1.6
-Desc:    Cleaning up the code/fixing bugs
-Optional Features: Colour and Timeout
+Date:    24-11-20
+Version: 0.1.7
+Desc:    Adding testing framework
 */
 package main
 
@@ -14,7 +13,9 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
+  "os"
+  "testing"
+  "github.com/stretchr/testify/assert"
 
 	flag "github.com/spf13/pflag"
 )
