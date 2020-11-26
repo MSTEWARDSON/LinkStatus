@@ -41,3 +41,16 @@ Directory
 ```bash
 golint ./
 ```
+
+### Testing
+If you are making a pull request, make sure to run:
+```bash
+go test
+```
+This will run your code through some checks to make sure it doesn't break the program. If you want to add your own tests just make a new file with a clear name to show its a test. For example "A_test.go".
+
+### Code Coverage Check
+To check the code coverage run:
+```bash
+go test [filename] -cover
+```
