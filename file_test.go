@@ -29,7 +29,7 @@ func TestReadFileFail(t *testing.T) {
 	fakeResult := []string{"https://wiki.cdot.senecacollege.ca/w/api.php?action=rsd"}
 	var result []string
 	result = readFile("testReadFile.txt", false, 1, false, false)
-	if result[0] == fakeResult[0] {
+	if result[0] != fakeResult[0] {
 		t.Errorf("Result was incorrect")
 	}
 }
