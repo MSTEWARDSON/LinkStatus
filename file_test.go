@@ -33,3 +33,23 @@ func TestReadFileFail(t *testing.T) {
 		t.Errorf("Result was incorrect")
 	}
 }
+
+//Tests the ignoreURL functions ability to construct a []string
+//when supplied a file
+func TestReadIgnoreFile(t *testing.T) {
+	fakeResult := []string{"https://wiki.cdot.senecacollege.ca/w/api.php?action=rsd"}
+	var result []string
+	result = ignoreURL("testReadFile.txt")
+	if result[0] != fakeResult[0] {
+		t.Errorf("Result was incorrect")
+	}
+}
+
+//Testing what happens when I give ignoreURL an empty file
+func TestEmptyIgnoreFile(t *testing.T) {
+	var result []string
+	result = ignoreURL("emptyFile.txt")
+	if result != nil {
+		t.Errorf("Result was incorrect")
+	}
+}
