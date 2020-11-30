@@ -5,9 +5,14 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Install GO on your machine and reboot. Then:
 
 Use the package manager to install LinkStatus.go
-```bash
+```go
 git clone https://github.com/MSTEWARDSON/LinkStatus.git
 cd LinkStatus
+go install
+```
+
+If you are making changes to the code, before you test run:
+```go
 go build
 ```
 
