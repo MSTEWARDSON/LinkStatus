@@ -1,4 +1,4 @@
-# LinkStatus Release 0.1
+# LinkStatus Release v1.0.0
 
 LinkStatus reads a supplied file, finds, and checks links via a GET request. The program returns the status codes of the links and lists them for the user in colour. A few test files are included within the project.
 
@@ -11,52 +11,54 @@ I have a blog going alongside the development of this project and future project
 
 ## Usage
 
+After installing, navigate to any directory and run any of the following commands:
+
 To recieve help information run the program with no arguments:
 
 ![](images/demo-1.PNG)
 
 ```go
-./LinkStatus
+LinkStatus
 ```
 
 To see the current version run:
 ```go
-./LinkStatus -v or --version
+LinkStatus -v or --version
 ```
 To run the program with a file and check the links use:
 
 ![](images/demo-2.PNG)
 
 ```go
-./LinkStatus filename
+LinkStatus filename
 ```
 To output the data in JSON format:
 
 ![](images/demo-3.PNG)
 
 ```go
-./LinkStatus filename -j or --json
+LinkStatus filename -j or --json
 ```
 
 To output all url response types:
 ```go
-./LinkStatus filename -a or --all
+LinkStatus filename -a or --all
 ```
 To output only good url response types:
 ```go
-./LinkStatus filename -g or --good
+LinkStatus filename -g or --good
 ```
 To output only bad url response types:
 
 ![](images/demo-4.PNG)
 
 ```go
-./LinkStatus filename -b or --bad
+LinkStatus filename -b or --bad
 
 ```
 To ingnore url patterns in ignore.txt:
 ```go
-./LinkStatus filename -i or --ignore
+LinkStatus filename -i or --ignore
 ```
 
 ## Libraries Used
@@ -64,13 +66,6 @@ To ingnore url patterns in ignore.txt:
 - [regexp](https://golang.org/pkg/regexp/): Used to search for http and https links in a string
 - [fatih color](https://github.com/fatih/color): USed to bring colour to the console output
 - [pflag](https://github.com/spf13/pflag): Used to add the optional -v or --version command line arguments
-
-## Optional Features
-- Colourized output: Good URLs come out green, bad URLs come out red, and unknown URLs come out in light blue
-- Timeout: If a GET request gets hanged up for too long, the program moves on.
-- JSON Format: URL list comes out in JSON format when selected
-- -All, -Good, -Bad: URL list can be sorted to certain categorys
-- -i, --ignore: ignore url patterns in ignore.txt.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
