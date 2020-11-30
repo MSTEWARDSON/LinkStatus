@@ -1,4 +1,4 @@
-# LinkStatus Release v1.0.2
+# LinkStatus Release v1.0.3
 
 LinkStatus reads a supplied file, finds, and checks links via a GET request. The program returns the status codes of the links and lists them for the user in colour. A few test files are included within the project.
 
@@ -8,6 +8,23 @@ This program was developed using the GO programming language.
 Hello to the person reading this. This is my release 0.1 project for the DPS909 class. The class is about open source development and this project had us use git and communicate with one another to solve problems we had during development.
 
 I have a blog going alongside the development of this project and future projects for this class which you can find [here](https://matthew-k-stewardson.blogspot.com/).
+
+## Installation
+Install [GO](https://golang.org/) on your machine and reboot. Then:
+
+Use the package manager to install LinkStatus OR download the zip from the lastest tag and extract it within your go/src/
+
+If installed via package manager
+```go
+git clone https://github.com/MSTEWARDSON/LinkStatus.git
+cd LinkStatus
+go install
+```
+
+If you downloaded, run:
+```go
+go install LinkStatus
+```
 
 ## Usage
 
