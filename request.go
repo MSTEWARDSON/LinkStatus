@@ -1,9 +1,3 @@
-/*
-Name:    Matthew Stewardson
-Date:    24-11-20
-Version: 0.1.7
-Desc:    Adding testing framework
-*/
 package main
 
 import (
