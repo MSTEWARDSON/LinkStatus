@@ -58,14 +58,14 @@ func main() {
 ==================================================================================
 ||                                LINK STATUS                                   ||
 ==================================================================================
-Default: ./LinkStatus [filenames]
-Example: ./LinkStatus urls.txt
-Version: ./LinkStatus -v or --version to check version.
-JSON: 	 ./LinkStatus -j or --json to output as JSON format
-All:  	 ./LinkStatus -a or --all to output all types of responses
-Good: 	 ./LinkStatus -g or --good to output only good types of responses
-Bad:  	 ./LinkStatus -b or --bad to output only bad types of responses
-Ignore:  ./LinkStatus test.txt -i or --ignore to ignore certain url patterns
+Default: LinkStatus [filenames]
+Example: LinkStatus urls.txt
+Version: LinkStatus -v or --version to check version.
+JSON: 	 LinkStatus -j or --json to output as JSON format
+All:  	 LinkStatus -a or --all to output all types of responses
+Good: 	 LinkStatus -g or --good to output only good types of responses
+Bad:  	 LinkStatus -b or --bad to output only bad types of responses
+Ignore:  LinkStatus test.txt -i or --ignore to ignore certain url patterns
 ==================================================================================
 				   `)
 		os.Exit(0)
