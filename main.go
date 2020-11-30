@@ -30,7 +30,7 @@ func main() {
 
 	flag.Parse()
 	if *version == true {
-		fmt.Println("LinkStatus version 0.1.7")
+		fmt.Println("LinkStatus version 1.0.2")
 		return
 	}
 	if *JSONout == true {

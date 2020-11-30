@@ -4,11 +4,18 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 ## Installation
 Install GO on your machine and reboot. Then:
 
-Use the package manager to install LinkStatus.go
+Use the package manager to install LinkStatus OR download the zip from the lastest tag and extract it within your go/src/
+
+If installed via package manager
 ```go
 git clone https://github.com/MSTEWARDSON/LinkStatus.git
 cd LinkStatus
 go install
+```
+
+If you downloaded, run:
+```go
+go install LinkStatus
 ```
 
 If you are making changes to the code, before you test run:
