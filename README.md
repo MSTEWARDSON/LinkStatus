@@ -23,7 +23,7 @@ go install
 
 If you downloaded, run:
 ```go
-go install LinkStatus
+go get github.com/MSTEWARDSON/LinkStatus
 ```
 
 ## Usage
