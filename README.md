@@ -1,4 +1,4 @@
-# LinkStatus Release v1.0.3
+# LinkStatus Release v1.0.5
 
 LinkStatus reads a supplied file, finds, and checks links via a GET request. The program returns the status codes of the links and lists them for the user in colour. A few test files are included within the project.
 
